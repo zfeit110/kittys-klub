@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kitty's Klues</title>
+<meta name="apple-mobile-web-app-title" content="Kitty's Klues">
+<meta name="theme-color" content="#ff8a65">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#ff8a65;font:17px/1.5 Nunito,system-ui,sans-serif;color:#3a2a22;padding:20px}
+.card{background:#fffaf5;border-radius:28px;padding:28px 22px;max-width:400px;width:100%;text-align:center}
+.kitty{width:110px;height:110px}
+h1{font-size:30px;margin:6px 0 4px}
+p{margin:8px 0;color:#8a7468}
+a.btn{display:block;margin-top:18px;background:#e8643e;color:#fff;text-decoration:none;font-weight:800;padding:14px;border-radius:999px}
+ol{text-align:left;margin:16px 0 0;padding-left:22px;color:#3a2a22}
+</style>
+</head>
+<body>
+<div class="card">
+  <svg class="kitty" viewBox="70 70 372 380" aria-hidden="true"><defs> <linearGradient id="kbg" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#ffa385"/> <stop offset="1" stop-color="#ff7752"/> </linearGradient> <radialGradient id="kfur" cx="0.42" cy="0.35" r="0.75"> <stop offset="0" stop-color="#ffffff"/> <stop offset="0.7" stop-color="#fdf8f5"/> <stop offset="1" stop-color="#efe3dc"/> </radialGradient> </defs> <ellipse cx="256" cy="438" rx="150" ry="20" fill="#000" opacity=".13"/> <!-- ears --> <path d="M128 214 L138 98 Q142 76 162 86 L246 150 Z" fill="url(#kfur)" stroke="#efe3dc" stroke-width="4" stroke-linejoin="round"/> <path d="M384 214 L374 98 Q370 76 350 86 L266 150 Z" fill="url(#kfur)" stroke="#efe3dc" stroke-width="4" stroke-linejoin="round"/> <path d="M150 180 L156 118 Q158 106 168 112 L214 150 Z" fill="#ffb3c7"/> <path d="M362 180 L356 118 Q354 106 344 112 L298 150 Z" fill="#ffb3c7"/> <!-- body --> <path d="M256 128 C368 128 426 206 426 300 C426 392 352 434 256 434 C160 434 86 392 86 300 C86 206 144 128 256 128 Z" fill="url(#kfur)"/> <ellipse cx="186" cy="182" rx="44" ry="20" transform="rotate(-24 186 182)" fill="#fff" opacity=".9"/> <!-- paws --> <ellipse cx="200" cy="416" rx="38" ry="22" fill="#fff" stroke="#eadcd4" stroke-width="4"/> <ellipse cx="312" cy="416" rx="38" ry="22" fill="#fff" stroke="#eadcd4" stroke-width="4"/> <!-- cheeks --> <ellipse cx="168" cy="318" rx="26" ry="15" fill="#ffb3c7" opacity=".75"/> <ellipse cx="344" cy="318" rx="26" ry="15" fill="#ffb3c7" opacity=".75"/> <!-- sleepy eyes --> <path d="M178 276 L220 276" fill="none" stroke="#3a2a22" stroke-width="11" stroke-linecap="round"/> <path d="M292 276 L334 276" fill="none" stroke="#3a2a22" stroke-width="11" stroke-linecap="round"/> <!-- nose + mouth --> <path d="M242 298 Q256 290 270 298 Q264 314 256 316 Q248 314 242 298 Z" fill="#ff7fa6"/> <path d="M234 324 Q245 338 256 324 Q267 338 278 324" fill="none" stroke="#3a2a22" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/> <!-- whiskers --> <g stroke="#c9b8ae" stroke-width="5" stroke-linecap="round"> <path d="M128 296 L88 288"/><path d="M130 312 L90 318"/> <path d="M384 296 L424 288"/><path d="M382 312 L422 318"/> </g> </svg>
+  <h1>Kitty's Klues</h1>
+  <p id="hi"></p>
+  <ol>
+    <li>Tap the <b>Share</b> button in Safari.</li>
+    <li>Choose <b>Add to Home Screen</b>, then <b>Add</b>.</li>
+    <li>Open Kitty's Klues from the new kitty icon.</li>
+  </ol>
+  <a class="btn" id="go" href="#">Open Kitty's Klues</a>
+</div>
+<script>
+{
+const EXEC='https://script.google.com/macros/s/AKfycbytApRwN4C5oh_7G6H9OYiRe-QAPkjR51-GOqK2S9yE0sttXkgrssrZcbfPHfETJ4MhTQ/exec';
+const q=new URLSearchParams(location.search),fwd=new URLSearchParams();
+['k','me'].forEach(n=>{if(q.get(n))fwd.set(n,q.get(n))});
+const dest=EXEC+(fwd.toString()?'?'+fwd:'');
+document.getElementById('go').href=dest;
+document.getElementById('hi').textContent=q.get('me')?'Hi '+q.get('me')+'! Save me to your Home Screen.':'Save me to your Home Screen.';
+if(q.get('go')==='1'){location.replace(dest)}
+else{q.set('go','1');try{history.replaceState(null,'',location.pathname+'?'+q)}catch(e){}}
+}
+</script>
+</body>
+</html>
