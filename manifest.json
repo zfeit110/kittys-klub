@@ -1,0 +1,21 @@
+{
+ "name": "Kitty's Klues",
+ "short_name": "Kitty's Klues",
+ "start_url": "./",
+ "display": "standalone",
+ "background_color": "#ff8a65",
+ "theme_color": "#ff8a65",
+ "icons": [
+  {
+   "src": "apple-touch-icon.png?v=2",
+   "sizes": "180x180",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512.png?v=2",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}
