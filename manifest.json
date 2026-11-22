@@ -1,7 +1,6 @@
 {
  "name": "Kitty's Klues",
  "short_name": "Kitty's Klues",
- "start_url": "./",
  "display": "standalone",
  "background_color": "#ff8a65",
  "theme_color": "#ff8a65",
