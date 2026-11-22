@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Kitty's Klues</title>
 <meta name="apple-mobile-web-app-title" content="Kitty's Klues">
 <meta name="theme-color" content="#ff8a65">
@@ -21,7 +21,7 @@ h1{font-size:30px;margin:6px 0 4px}
 p{margin:8px 0;color:#8a7468}
 a.btn{display:block;margin-top:18px;background:#e8643e;color:#fff;text-decoration:none;font-weight:800;padding:14px;border-radius:999px}
 #app{position:fixed;left:0;right:0;bottom:0;top:env(safe-area-inset-top);width:100%;height:calc(100% - env(safe-area-inset-top));border:0;background:#fffaf5;display:none}
-body.inapp{background:#ff8a65;padding:0}body.inapp .card{display:none}body.inapp #app{display:block}
+body.inapp{background:var(--bar,#ff8a65);padding:0}body.inapp .card{display:none}body.inapp #app{display:block}
 ol{text-align:left;margin:16px 0 0;padding-left:22px;color:#3a2a22}
 </style>
 </head>
@@ -51,6 +51,10 @@ const me=fwd.get('me');
 document.getElementById('go').href=dest;
 document.getElementById('hi').textContent=me?'Hi '+me+'! Save me to your Home Screen.':'Save me to your Home Screen.';
 const standalone=navigator.standalone===true||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;
+// paint the strip behind the clock to match the app (the app reports its colour)
+const setBar=c=>{if(!/^#[0-9a-f]{6}$/i.test(c||''))return;document.documentElement.style.setProperty('--bar',c);document.querySelector('meta[name=theme-color]').content=c;store.set('kkfd-bar',c)};
+setBar(store.get('kkfd-bar'));
+addEventListener('message',e=>{const d=e.data;if(d&&d.kk==='bar')setBar(d.color)});
 if(standalone||q.get('go')==='1'){document.body.classList.add('inapp');document.getElementById('app').src=dest}
 else{q.set('go','1');try{history.replaceState(null,'',location.pathname+'?'+q)}catch(e){}}
 }
