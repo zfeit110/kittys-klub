@@ -62,8 +62,10 @@ if(standalone||q.get('go')==='1'){document.body.classList.add('inapp');document.
   // keep the app inside the visible area: when the iPhone keyboard opens, iOS slides the page up;
   // instead, shrink the app to the space above the keyboard so its top bar never hides under the clock
   const app=document.getElementById('app'),safe=document.getElementById('safe'),vv=window.visualViewport;
-  const fit=()=>{const band=(safe.offsetHeight||0)+16,off=vv?vv.offsetTop:0,h=vv?vv.height:innerHeight;
-    app.style.top=(off+band)+'px';app.style.height=Math.max(0,h-band)+'px';app.style.bottom='auto';if(window.scrollY)window.scrollTo(0,0)};
+  const fit=()=>{const band=(safe.offsetHeight||0)+16,off=vv?vv.offsetTop:0,h=vv?vv.height:innerHeight,full=Math.max(document.documentElement.clientHeight||0,innerHeight);
+    if(full-h-off<120){app.style.top='';app.style.height='';app.style.bottom='';}  // no keyboard: normal full-height layout
+    else{app.style.top=(off+band)+'px';app.style.height=Math.max(0,h-band)+'px';app.style.bottom='auto'}
+    if(window.scrollY)window.scrollTo(0,0)};
   let raf=0;const req=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(fit)};
   if(vv){vv.addEventListener('resize',req);vv.addEventListener('scroll',req)}addEventListener('resize',req);addEventListener('orientationchange',req);fit()}
 else{q.set('go','1');try{history.replaceState(null,'',location.pathname+'?'+q)}catch(e){}}
