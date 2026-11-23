@@ -63,7 +63,11 @@ const setBg=c=>{if(/^#[0-9a-f]{6}$/i.test(c||'')){document.documentElement.style
 const TAGS=["Warming up the anagrams…","Hiding words in plain sight…","Consulting the cat…","Rearranging letters, please hold","Channeling our inner Angas"];
 try{const last=+(store.get('kkfd-tag')||-1);let i=Math.floor(Math.random()*TAGS.length);if(TAGS.length>1&&i===last)i=(i+1)%TAGS.length;document.getElementById('stag').textContent=TAGS[i];store.set('kkfd-tag',String(i))}catch(e){}
 const hideSplash=()=>{const s=document.getElementById('splash');if(s&&!s.classList.contains('gone')){s.classList.add('gone');setTimeout(()=>s.remove(),400)}};setTimeout(hideSplash,20000);
-addEventListener('message',e=>{const d=e.data;if(d&&d.kk==='bar'){setBar(d.color);setBg(d.bg);hideSplash()}});
+/* keep the app's settings here, where iPhone doesn't clear them, and hand them back each launch */
+const MK='kkfd-mirror',mget=()=>{try{return JSON.parse(store.get(MK)||'{}')||{}}catch(e){return {}}};let restored=false;
+addEventListener('message',e=>{const d=e.data;if(!d||!d.kk)return;
+  if(d.kk==='set'&&restored&&typeof d.k==='string'&&/^kk-/.test(d.k)&&d.k.length<60){const M=mget();M[d.k]=String(d.v).slice(0,200000);store.set(MK,JSON.stringify(M))}
+  if(d.kk==='bar'){setBar(d.color);setBg(d.bg);if(!restored&&e.source){restored=true;try{e.source.postMessage({kk:'restore',data:mget()},'*')}catch(_){}setTimeout(hideSplash,150)}else hideSplash()}});
 if(standalone||q.get('go')==='1'){document.body.classList.add('inapp');document.getElementById('app').src=dest;
   // keep the app inside the visible area: when the iPhone keyboard opens, iOS slides the page up;
   // instead, shrink the app to the space above the keyboard so its top bar never hides under the clock
