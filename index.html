@@ -60,7 +60,7 @@ const standalone=navigator.standalone===true||matchMedia('(display-mode: standal
 const setBar=c=>{if(!/^#[0-9a-f]{6}$/i.test(c||''))return;document.documentElement.style.setProperty('--bar',c);document.querySelector('meta[name=theme-color]').content=c;store.set('kkfd-bar',c)};
 setBar(store.get('kkfd-bar'));
 const setBg=c=>{if(/^#[0-9a-f]{6}$/i.test(c||'')){document.documentElement.style.setProperty('--pbg',c);store.set('kkfd-bg',c)}};setBg(store.get('kkfd-bg'));
-const TAGS=["Warming up the anagrams…","Hiding words in plain sight…","Consulting the cat…","Rearranging letters, please hold","Channeling our inner Angas"];
+const TAGS=["Warming up the anagrams…","Hiding words in plain sight…","Consulting the kitty…","Rearranging letters, please hold","Channeling our inner Angas","Praying it’s not a Cory clue 🫪"];
 try{const last=+(store.get('kkfd-tag')||-1);let i=Math.floor(Math.random()*TAGS.length);if(TAGS.length>1&&i===last)i=(i+1)%TAGS.length;document.getElementById('stag').textContent=TAGS[i];store.set('kkfd-tag',String(i))}catch(e){}
 const hideSplash=()=>{const s=document.getElementById('splash');if(s&&!s.classList.contains('gone')){s.classList.add('gone');setTimeout(()=>s.remove(),400)}};setTimeout(hideSplash,20000);
 /* keep the app's settings here, where iPhone doesn't clear them, and hand them back each launch */
