@@ -23,7 +23,7 @@ h1{font-size:30px;margin:6px 0 4px}
 p{margin:8px 0;color:#8a7468}
 a.btn{display:block;margin-top:18px;background:#e8643e;color:#fff;text-decoration:none;font-weight:800;padding:14px;border-radius:999px}
 #app{position:fixed;left:0;right:0;bottom:0;top:calc(env(safe-area-inset-top) + 16px);width:100%;height:calc(100% - env(safe-area-inset-top) - 16px);border:0;background:#fffaf5;display:none}
-body.inapp{background:linear-gradient(var(--bar,#ff8a65) 0 120px,var(--pbg,var(--bar,#ff8a65)) 120px);padding:0;position:fixed;inset:0;overflow:hidden;min-height:0}#safe{position:fixed;top:0;height:env(safe-area-inset-top);width:0;visibility:hidden}body.inapp .card{display:none}body.inapp #app{display:block}
+body.inapp{background:linear-gradient(var(--bar,#ff8a65) 0 120px,var(--pbg,var(--bar,#ff8a65)) 120px);padding:0}#safe{position:fixed;top:0;height:env(safe-area-inset-top);width:0;visibility:hidden}body.inapp .card{display:none}body.inapp #app{display:block}
 ol{text-align:left;margin:16px 0 0;padding-left:22px;color:#3a2a22}
 </style>
 </head>
@@ -66,9 +66,9 @@ if(standalone||q.get('go')==='1'){document.body.classList.add('inapp');document.
   const fit=()=>{const band=(safe.offsetHeight||0)+16,off=vv?vv.offsetTop:0,h=vv?vv.height:innerHeight,full=Math.max(document.documentElement.clientHeight||0,innerHeight);
     if(full-h-off<120){app.style.top='';app.style.height='';app.style.bottom='';}  // no keyboard: normal full-height layout
     else{app.style.top=(off+band)+'px';app.style.height=Math.max(0,h-band)+'px';app.style.bottom='auto'}
-    if(window.scrollY)window.scrollTo(0,0)};
+    };
   let raf=0;const req=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(fit)};
-  if(vv){vv.addEventListener('resize',req);vv.addEventListener('scroll',req)}addEventListener('resize',req);addEventListener('orientationchange',req);fit()}
+  if(vv){vv.addEventListener('resize',req);vv.addEventListener('scroll',req)}addEventListener('resize',req);addEventListener('orientationchange',req)}
 else{q.set('go','1');try{history.replaceState(null,'',location.pathname+'?'+q)}catch(e){}}
 }
 </script>
